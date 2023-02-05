@@ -8,10 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class VinylController extends AbstractController
 {
-    #[Route('/')]
+    #[Route('/', name: 'app_homepage')]
     public function homePage(): Response
     {
-
         $tracks = [
             ['song' => 'Gangsta\'s Paradise', 'artist' => 'Coolio'],
             ['song' => 'Waterfalls', 'artist' => 'TLC'],
@@ -27,12 +26,13 @@ class VinylController extends AbstractController
         ]);
     }
 
-    #[Route('/browse/{slug}')]
-    public function search(string $slug = null):Response
+    #[Route('/browse/{slug}', name: 'app_browse')]
+    public function browse(string $slug = null):Response
     {
-        $slug ? $title = 'Genre: '.ucwords(str_replace('-', ' ', $slug)) : $title = 'All Genres';
-
-        return new Response($title);
+        $genre = $slug ? ucwords(str_replace('-', ' ', $slug)) : null;
+        return $this->render('vinyl/browse.html.twig', [
+            'genre' => $genre,
+        ]);
     }
 
 

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class VinylController extends AbstractController
 {
     #[Route('/', name: 'app_homepage')]
@@ -20,10 +21,11 @@ class VinylController extends AbstractController
             ['song' => 'Fantasy', 'artist' => 'Mariah Carey'],
         ];
 
-        return $this->render('/vinyl/homepage.html.twig', [
+        $this->render('/vinyl/homepage.html.twig', [
             'title' => 'PB & James',
             'tracks' => $tracks
         ]);
+
     }
 
     #[Route('/browse/{slug}', name: 'app_browse')]
